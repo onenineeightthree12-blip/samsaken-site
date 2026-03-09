@@ -277,10 +277,39 @@ width:100%;
 border-radius:12px;
 }
 
-.media iframe{
+/* VIDEO POSTER */
+
+.trailer{
+position:relative;
 width:100%;
 height:320px;
 border-radius:12px;
+overflow:hidden;
+cursor:pointer;
+}
+
+.trailer img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.trailer .play{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:50px;
+background:rgba(0,0,0,0.6);
+padding:15px 25px;
+border-radius:10px;
+}
+
+.trailer iframe{
+width:100%;
+height:100%;
+border:0;
+display:none;
 }
 
 /* DISCORD PAGE */
@@ -501,11 +530,18 @@ Game Info
 
 <img src="banner.png">
 
+<div class="trailer" onclick="playTrailer(this)">
+
+<img src="banner.png">
+
+<div class="play">▶</div>
+
 <iframe
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-frameborder="0"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
 allowfullscreen>
 </iframe>
+
+</div>
 
 </div>
 
@@ -594,6 +630,16 @@ a.classList.remove("activeTab")
 })
 
 if(element) element.classList.add("activeTab")
+
+}
+
+/* TRAILER PLAY */
+
+function playTrailer(el){
+
+el.querySelector("img").style.display="none"
+el.querySelector(".play").style.display="none"
+el.querySelector("iframe").style.display="block"
 
 }
 
