@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Samsaken</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+
+background:
+radial-gradient(circle at center,rgba(120,0,30,0.2),transparent 60%),
+linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.95)),
+url("banner.png");
+
+background-size:cover;
+background-position:center;
+
+color:white;
+height:100vh;
+overflow:hidden;
+
+}
+
+/* PARTICLES */
+
+#particles{
+position:fixed;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(12px);
+z-index:5;
+}
+
+.logo img{
+height:70px;
+cursor:pointer;
+}
+
+.navlinks a{
+margin-left:25px;
+cursor:pointer;
+opacity:0.7;
+transition:0.3s;
+font-size:17px;
+}
+
+.navlinks a:hover{
+opacity:1;
+color:#ff2e63;
+}
+
+.activeTab{
+color:#ff2e63;
+}
+
+/* PAGE */
+
+.container{
+height:calc(100vh - 100px);
+position:relative;
+}
+
+.page{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+transform:translateY(40px);
+transition:0.6s;
+pointer-events:none;
+}
+
+.page.active{
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+max-width:900px;
+}
+
+.hero-logo{
+width:520px;
+max-width:90%;
+animation:pulse 3s infinite;
+filter:drop-shadow(0 0 25px #ff2e63);
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
+}
+
+.hero p{
+margin-top:20px;
+font-size:18px;
+opacity:0.9;
+}
+
+/* BUTTON GROUP */
+
+.buttons{
+margin-top:40px;
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+/* PLAY BUTTON BIG */
+
+.playbtn{
+
+padding:22px 60px;
+
+border-radius:14px;
+
+font-weight:bold;
+
+font-size:20px;
+
+background:#ff2e63;
+
+color:white;
+
+text-decoration:none;
+
+box-shadow:
+0 0 20px #ff2e63,
+0 0 60px #ff2e63;
+
+animation:playPulse 2s infinite;
+
+transition:0.3s;
+
+}
+
+@keyframes playPulse{
+
+0%{box-shadow:0 0 20px #ff2e63}
+50%{box-shadow:0 0 40px #ff2e63}
+100%{box-shadow:0 0 20px #ff2e63}
+
+}
+
+.playbtn:hover{
+
+transform:scale(1.15);
+
+box-shadow:
+0 0 30px #ff2e63,
+0 0 80px #ff2e63;
+
+}
+
+/* SECOND BUTTON */
+
+.secbtn{
+
+padding:16px 35px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+text-decoration:none;
+
+background:#111;
+
+border:1px solid #333;
+
+color:white;
+
+transition:0.3s;
+
+}
+
+.secbtn:hover{
+
+border:1px solid #ff2e63;
+
+box-shadow:0 0 15px #ff2e63;
+
+}
+
+/* STATS */
+
+.stats{
+display:flex;
+gap:40px;
+margin-top:40px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.stat{
+background:#0a0a0a;
+padding:25px 35px;
+border-radius:14px;
+border:1px solid #222;
+transition:0.3s;
+}
+
+.stat:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px #ff2e63;
+}
+
+.stat h2{
+color:#ff2e63;
+font-size:34px;
+}
+
+/* GAME CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+width:900px;
+}
+
+.card{
+background:#0a0a0a;
+padding:30px;
+border-radius:14px;
+border:1px solid #222;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px #ff2e63;
+}
+
+/* MEDIA */
+
+.media{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+width:1000px;
+}
+
+.media img{
+width:100%;
+border-radius:12px;
+}
+
+.media iframe{
+width:100%;
+height:320px;
+border-radius:12px;
+}
+
+/* DISCORD PAGE */
+
+.discord-page{
+display:flex;
+gap:40px;
+align-items:flex-start;
+}
+
+.discord-left{
+text-align:center;
+}
+
+.discord-left img{
+width:110px;
+margin-bottom:15px;
+}
+
+.discordbtn{
+display:inline-block;
+margin-top:20px;
+background:#5865F2;
+padding:15px 40px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+box-shadow:0 0 20px #5865F2;
+}
+
+.discordbtn:hover{
+transform:scale(1.1);
+}
+
+/* COMMUNITY */
+
+.community{
+display:grid;
+grid-template-columns:repeat(2,200px);
+gap:20px;
+}
+
+.community-card{
+background:#0a0a0a;
+padding:20px;
+border-radius:10px;
+border:1px solid #222;
+}
+
+.community-card h3{
+color:#ff2e63;
+}
+
+/* DEV LIST */
+
+.devs{
+margin-top:20px;
+}
+
+.dev{
+margin-top:8px;
+opacity:0.8;
+}
+
+/* GLITCH EFFECT */
+
+.glitch{
+
+animation:glitch 0.2s infinite;
+
+}
+
+@keyframes glitch{
+
+0%{transform:translate(2px,0)}
+25%{transform:translate(-2px,1px)}
+50%{transform:translate(2px,-1px)}
+75%{transform:translate(-1px,2px)}
+100%{transform:translate(0)}
+
+}
+
+/* SECRET MESSAGE */
+
+.secret{
+
+position:fixed;
+
+bottom:20px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+background:black;
+
+padding:10px 20px;
+
+border:1px solid #ff2e63;
+
+display:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="particles"></div>
+
+<div class="navbar">
+
+<div class="logo">
+<img id="logo" src="icon.png">
+</div>
+
+<div class="navlinks">
+
+<a class="activeTab" onclick="showPage('home',this)">Home</a>
+<a onclick="showPage('game',this)">Game</a>
+<a onclick="showPage('media',this)">Media</a>
+<a onclick="showPage('discord',this)">Discord</a>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<!-- HOME -->
+
+<div id="home" class="page active">
+
+<div class="hero">
+
+<img class="hero-logo" src="icon.png">
+
+<p>Enter the prison. Survive the hunt.</p>
+
+<div class="buttons">
+
+<a class="playbtn"
+href="https://www.roblox.com/games/110579361114277/Boxsaken">
+PLAY SAMSAKEN
+</a>
+
+<a class="secbtn" onclick="showPage('media',document.querySelectorAll('.navlinks a')[2])">
+Watch Trailer
+</a>
+
+<a class="secbtn"
+href="https://discord.gg/D7nQpyN2"
+target="_blank">
+Join Discord
+</a>
+
+<a class="secbtn" onclick="showPage('game',document.querySelectorAll('.navlinks a')[1])">
+Game Info
+</a>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="players">0</h2>
+<p>Players Online</p>
+</div>
+
+<div class="stat">
+<h2 id="visits">0</h2>
+<p>Total Visits</p>
+</div>
+
+<div class="stat">
+<h2>2025</h2>
+<p>Release</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- GAME -->
+
+<div id="game" class="page">
+
+<div class="grid">
+
+<div class="card">
+<h3>⚔️ 1 vs All</h3>
+<p>One killer hunts every survivor.</p>
+</div>
+
+<div class="card">
+<h3>🛡 Team Survival</h3>
+<p>Work together to escape.</p>
+</div>
+
+<div class="card">
+<h3>☠ Killers</h3>
+<p>Eliminate everyone.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- MEDIA -->
+
+<div id="media" class="page">
+
+<div class="media">
+
+<img src="banner.png">
+
+<iframe
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+<!-- DISCORD -->
+
+<div id="discord" class="page">
+
+<div class="discord-page">
+
+<div class="discord-left">
+
+<img src="discord.png">
+
+<h2>Join the Community</h2>
+
+<a class="discordbtn"
+href="https://discord.gg/D7nQpyN2"
+target="_blank">
+
+Join Server
+
+</a>
+
+<div class="devs">
+
+<h3 style="margin-top:25px;color:#ff2e63;">Developers</h3>
+
+<div class="dev">Sxltyz</div>
+<div class="dev">Ninejak</div>
+<div class="dev">M0jli</div>
+
+</div>
+
+</div>
+
+<div class="community">
+
+<div class="community-card">
+<h3>12,000+</h3>
+<p>Members</p>
+</div>
+
+<div class="community-card">
+<h3>2,300+</h3>
+<p>Online</p>
+</div>
+
+<div class="community-card">
+<h3>Events</h3>
+<p>Weekly Community Events</p>
+</div>
+
+<div class="community-card">
+<h3>Updates</h3>
+<p>Dev Logs & Sneak Peeks</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="secret" class="secret">
+You shouldn't be here.
+</div>
+
+<script>
+
+/* PAGE SYSTEM */
+
+function showPage(id,element){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active")
+})
+
+document.getElementById(id).classList.add("active")
+
+document.querySelectorAll(".navlinks a").forEach(a=>{
+a.classList.remove("activeTab")
+})
+
+if(element) element.classList.add("activeTab")
+
+}
+
+/* STATS */
+
+let players=12000
+setInterval(()=>{
+players+=Math.floor(Math.random()*50-20)
+document.getElementById("players").innerText=Math.floor(players).toLocaleString()
+},2000)
+
+let visits=12800000
+setInterval(()=>{
+visits+=Math.floor(Math.random()*150)
+document.getElementById("visits").innerText=visits.toLocaleString()
+},1000)
+
+/* PARTICLES */
+
+const canvas=document.createElement("canvas")
+document.getElementById("particles").appendChild(canvas)
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2
+})
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach(p=>{
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2)
+ctx.fillStyle="white"
+ctx.fill()
+
+p.y-=0.2
+if(p.y<0)p.y=canvas.height
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+/* LOGO EASTER EGG */
+
+let clicks=0
+
+document.getElementById("logo").onclick=()=>{
+
+clicks++
+
+if(clicks>=5){
+
+document.body.classList.add("glitch")
+
+setTimeout(()=>{
+document.body.classList.remove("glitch")
+},2000)
+
+clicks=0
+
+}
+
+}
+
+/* KEYWORD EASTER EGG */
+
+let keys=""
+
+document.addEventListener("keydown",e=>{
+
+keys+=e.key.toLowerCase()
+
+if(keys.includes("forsaken")){
+
+document.getElementById("secret").style.display="block"
+
+setTimeout(()=>{
+document.getElementById("secret").style.display="none"
+},4000)
+
+keys=""
+
+}
+
+})
+
+</script>
+
+</body>
+
+</html>
